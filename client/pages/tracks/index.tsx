@@ -5,7 +5,7 @@ import {useRouter} from 'next/router'
 import { ITrack } from '@/types/track';
 import TrackList from '@/components/TrackList';
 
-const Index = () => {
+const TracksPage = () => {
 
     const router = useRouter()
     const tracks: ITrack[] = [
@@ -33,4 +33,4 @@ const Index = () => {
     );
 }
 
-export default Index
+export default TracksPage
