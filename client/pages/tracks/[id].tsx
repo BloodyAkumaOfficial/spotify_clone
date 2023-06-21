@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 const TrackPage = () => {
 
-    const track: ITrack = {_id: '1', name: 'song 1', artist: 'artist 1', text: 'text 1', listens: 0, picture: 'picture 1', audio: 'audio 1', comments: [{_id: 1, username: "Username 1", text: 'Lorem ipsum'}]}
+    const track: ITrack = {_id: '1', name: 'song 1', artist: 'artist 1', text: 'text 1', listens: 0, picture: 'picture 1', audio: 'audio 1', comments: [{_id: '1', username: "Username 1", text: 'Lorem ipsum'}]}
     const router = useRouter();
 
     return (
