@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { FC, PropsWithChildren } from "react";
 import {Container} from '@mui/material'
+import Player from '@/components/PLayer';
 
 
 const MainLayout: FC<PropsWithChildren<unknown>> = ({children}) => {
@@ -10,6 +11,7 @@ const MainLayout: FC<PropsWithChildren<unknown>> = ({children}) => {
             <Container style={{margin: '90px auto'}}>
                 {children}
             </Container> 
+            <Player/>
         </>
     );
 }

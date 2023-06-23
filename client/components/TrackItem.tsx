@@ -26,11 +26,12 @@ const TrackItem: React.FC<TrackItemProps> = ({track, active = true}) => {
             <Grid container direction='column' style={{width: 600, margin: '0 20px'}}>
                 <div>{track.name}</div>
                 <div style={{fontSize: 12, color: 'grey'}}>{track.artist}</div>
-                {active && <div>02:42 / 03:54</div>}
-                <IconButton onClick={e => e.stopPropagation()} style={{marginLeft: 'auto', alignSelf: 'center'}}>
-                    <Delete/>
-                </IconButton>
             </Grid>
+            {active && <div>02:42 / 03:54</div>}
+            <IconButton onClick={e => e.stopPropagation()} style={{marginLeft: 'auto'}}>
+                <Delete/>
+            </IconButton>
+            
         </Card>
     );
 };
