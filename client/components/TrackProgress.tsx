@@ -16,7 +16,7 @@ const TrackProgress: React.FC<TrackProgressProps> = ({left, right, onChange}) =>
             value={left}
             onChange={onChange}
             />
-            <div>{left} / {right}</div>
+            <div>{left} / {right}</div>   
         </div>
     );
 };
