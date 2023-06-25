@@ -9,15 +9,18 @@ const FileUpload: React.FC<PropsWithChildren<FileUploadProps>> = ({setFile, acce
 
     const ref = useRef<HTMLInputElement>();
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // @ts-ignore
         setFile(e.target.files[0])
     }
 
     return (
+        // @ts-ignore
         <div onClick={() => ref.current.click()}>
             <input 
                 type='file'
                 accept={accept}
                 style={{display: 'none'}}
+                // @ts-ignore
                 ref={ref}
                 onChange={onChange}
             />

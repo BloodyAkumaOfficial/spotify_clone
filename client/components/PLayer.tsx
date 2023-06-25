@@ -1,31 +1,82 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { IconButton, Grid } from '@mui/material';
 import { Pause, PlayArrow, VolumeUp } from '@mui/icons-material';
 import TrackProgress from '@/components/TrackProgress';
-import { ITrack } from '@/types/track';
+import {useTypedSelector} from "@/hooks/useTypedSelector";
+import {useAction} from "@/hooks/useAction";
 
+
+let audio: HTMLMediaElement;
 const Player = () => {
 
-    const active = true
-    const track: ITrack = {_id: '1', name: 'song 1', artist: 'artist 1', text: 'text 1', listens: 0, picture: 'picture 1', audio: 'audio 1', comments: [{_id: '1', username: "Username 1", text: 'Lorem ipsum'}]}
+    const {pause, active, volume, duration, currentTime} = useTypedSelector(state => state.player)
+    const {pauseTrack, playTrack, setVolume, setActiveTrack, setDuration, setCurrentTime} = useAction()
+
+    useEffect(() => {
+        if (!audio) {
+            audio = new Audio();
+        } else {
+            setAudio();
+            play();
+        }
+    }, [active])
+
+    const setAudio = () => {
+        if (active) {
+            audio.src = 'http://localhost:5000/' + active.audio;
+            audio.volume = volume / 100;
+            // @ts-ignore
+            audio.onloadeddata(() => {
+                setDuration(Math.ceil(audio.duration))
+            })
+            // @ts-ignore
+            audio.ontimeupdate(() => {
+                setCurrentTime(Math.ceil(audio.currentTime))
+            })
+        }
+    }
+
+    const play = () => {
+        if (pause) {
+            playTrack()
+            audio.play()
+        } else {
+            pauseTrack()
+            audio.pause()
+        }
+    }
+
+    const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+        audio.volume = Number(e.target.value) / 100
+        setVolume(Number(e.target.value))
+    }
+
+    const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+        audio.currentTime = Number(e.target.value)
+        setCurrentTime(Number(e.target.value))
+    }
+
+    if (!active) {
+        return null;
+    }
 
     return (
         <>
             <div className='player'>
-                <IconButton onClick={e => e.stopPropagation()}>
-                    {active ?
+                <IconButton onClick={play}>
+                    {!pause ?
                         <Pause/>
                     :
                         <PlayArrow/>
                     }
                 </IconButton>
                 <Grid container direction='column' style={{width: 600, margin: '0 20px'}}>
-                    <div>{track.name}</div>
-                    <div style={{fontSize: 12, color: 'grey'}}>{track.artist}</div>
+                    <div>{active?.name}</div>
+                    <div style={{fontSize: 12, color: 'grey'}}>{active?.artist}</div>
                 </Grid>
-                <TrackProgress left={0} right={100} onChange={() => ({})}/>
+                <TrackProgress left={currentTime} right={duration} onChange={changeCurrentTime}/>
                 <VolumeUp style={{marginLeft: 'auto'}}/>
-                <TrackProgress left={0} right={100} onChange={() => ({})}/>
+                <TrackProgress left={volume} right={100} onChange={changeVolume}/>
             </div>
             <style jsx>
             {`
