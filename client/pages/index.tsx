@@ -4,7 +4,7 @@ import MainLayout from '../layouts/MainLayout';
 const Index = () => {
     return(
         <>
-            <MainLayout>
+            <MainLayout title={'Home page'}>
                 <div className='center'>
                     <h1>Welcome!</h1>
                     <h3>The best songs are collected here</h3>

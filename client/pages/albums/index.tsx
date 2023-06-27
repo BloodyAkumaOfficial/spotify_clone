@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 const AlbumPage = () => {
     return (
         <>
-            <MainLayout>
+            <MainLayout title={'Albums page'}>
                 <Grid container justifyContent='center'>
                     Albums Page
                 </Grid>

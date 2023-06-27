@@ -28,7 +28,7 @@ const TrackPage = ({serverTrack}) => {
     }
 
     return (
-        <MainLayout>
+        <MainLayout title={`${track.name}`}>
             <Button 
                 variant={'outlined'}
                 style={{fontSize: 20}}

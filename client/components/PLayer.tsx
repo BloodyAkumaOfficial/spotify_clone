@@ -1,38 +1,37 @@
 import React, {useEffect} from 'react';
-import { IconButton, Grid } from '@mui/material';
-import { Pause, PlayArrow, VolumeUp } from '@mui/icons-material';
-import TrackProgress from './TrackProgress';
+import {Pause, PlayArrow, VolumeUp} from "@material-ui/icons";
+import {Grid, IconButton} from "@material-ui/core";
+import styles from '../styles/Player.module.scss'
+import {ITrack} from "../types/track";
+import TrackProgress from "./TrackProgress";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {useAction} from "../hooks/useAction";
-
+import {useActions} from "../hooks/useActions";
 
 let audio;
-const Player = () => {
 
-    const {pause, active, volume, duration, currentTime} = useTypedSelector(state => state.player)
-    const {pauseTrack, playTrack, setVolume, setActiveTrack, setDuration, setCurrentTime} = useAction()
+const Player = () => {
+    const {pause, volume, active, duration, currentTime} = useTypedSelector(state => state.player)
+    const {pauseTrack, playTrack, setVolume, setCurrentTime, setDuration, setActiveTrack} = useActions()
 
     useEffect(() => {
         if (!audio) {
-            audio = new Audio();
+            audio = new Audio()
         } else {
-            setAudio();
-            play();
+            setAudio()
+            play()
         }
     }, [active])
 
     const setAudio = () => {
         if (active) {
-            audio.src = 'http://localhost:5000/' + active.audio;
-            audio.volume = volume / 100;
-
-            audio.onloadedmetadata(e => {
+            audio.src = 'http://localhost:5000/' + active.audio
+            audio.volume = volume / 100
+            audio.onloadedmetadata = () => {
                 setDuration(Math.ceil(audio.duration))
-            })
-
-            audio.ontimeupdate(e => {
+            }
+            audio.ontimeupdate = () => {
                 setCurrentTime(Math.ceil(audio.currentTime))
-            })
+            }
         }
     }
 
@@ -50,50 +49,32 @@ const Player = () => {
         audio.volume = Number(e.target.value) / 100
         setVolume(Number(e.target.value))
     }
-
     const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
         audio.currentTime = Number(e.target.value)
         setCurrentTime(Number(e.target.value))
     }
 
     if (!active) {
-        return null;
+        return null
     }
 
     return (
-        <>
-            <div className='player'>
-                <IconButton onClick={play}>
-                    {!pause ?
-                        <Pause/>
-                    :
-                        <PlayArrow/>
-                    }
-                </IconButton>
-                <Grid container direction='column' style={{width: 600, margin: '0 20px'}}>
-                    <div>{active?.name}</div>
-                    <div style={{fontSize: 12, color: 'grey'}}>{active?.artist}</div>
-                </Grid>
-                <TrackProgress left={currentTime} right={duration} onChange={changeCurrentTime}/>
-                <VolumeUp style={{marginLeft: 'auto'}}/>
-                <TrackProgress left={volume} right={100} onChange={changeVolume}/>
-            </div>
-            <style jsx>
-            {`
-                .player {
-                    height: 60px;
-                    width: 100%;
-                    position: fixed;
-                    bottom: 0;
-                    display: flex;
-                    align-items: center;
-                    padding: 0 20px;
-                    background-color: lightgray;
+        <div className={styles.player}>
+            <IconButton onClick={play}>
+                {pause
+                    ? <PlayArrow/>
+                    : <Pause/>
                 }
-            `}
-            </style>
-        </>
+            </IconButton>
+            <Grid container direction="column" style={{width: 200, margin: '0 20px'}}>
+                <div>{active?.name}</div>
+                <div style={{fontSize: 12, color: 'gray'}}>{active?.artist}</div>
+            </Grid>
+            <TrackProgress left={currentTime} right={duration} onChange={changeCurrentTime}/>
+            <VolumeUp style={{marginLeft: 'auto'}}/>
+            <TrackProgress left={volume} right={100} onChange={changeVolume}/>
+        </div>
     );
-}
+};
 
 export default Player;
