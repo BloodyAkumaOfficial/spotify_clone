@@ -1,5 +1,5 @@
-import MainLayout from '@/layouts/MainLayout';
-import { ITrack } from '@/types/track';
+import MainLayout from '../../layouts/MainLayout';
+import { ITrack } from '../../types/track';
 import { Button, Grid, TextField } from '@mui/material';
 import React from 'react';
 import { useRouter } from 'next/router';

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import MainLayout from '@/layouts/MainLayout';
-import StepWrapper from '@/components/StepWrapper';
+import MainLayout from '../../layouts/MainLayout';
+import StepWrapper from '../../components/StepWrapper';
 import { Button, Grid, TextField } from '@mui/material';
-import FileUpload from '@/components/FileUpload';
+import FileUpload from '../../components/FileUpload';
 
 
 const Create = () => {

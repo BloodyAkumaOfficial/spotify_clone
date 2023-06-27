@@ -1,4 +1,4 @@
-import { ITrack } from '@/types/track';
+import { ITrack } from '../types/track';
 import React from 'react';
 import { Grid, Box } from '@mui/material';
 import TrackItem from './TrackItem';

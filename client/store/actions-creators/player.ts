@@ -1,5 +1,5 @@
-import {PlayerAction, PlayerActionTypes} from "@/types/player";
-import {ITrack} from "@/types/track";
+import {PlayerAction, PlayerActionTypes} from "../../types/player";
+import {ITrack} from "../../types/track";
 
 
 export const playTrack = (): PlayerAction => {

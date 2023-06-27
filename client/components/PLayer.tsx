@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import { IconButton, Grid } from '@mui/material';
 import { Pause, PlayArrow, VolumeUp } from '@mui/icons-material';
-import TrackProgress from '@/components/TrackProgress';
-import {useTypedSelector} from "@/hooks/useTypedSelector";
-import {useAction} from "@/hooks/useAction";
+import TrackProgress from './TrackProgress';
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useAction} from "../hooks/useAction";
 
 
 let audio: HTMLMediaElement;

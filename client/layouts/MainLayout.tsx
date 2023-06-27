@@ -1,7 +1,7 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "../components/Navbar";
 import { FC, PropsWithChildren } from "react";
 import {Container} from '@mui/material'
-import Player from '@/components/PLayer';
+import Player from '../components/PLayer';
 
 
 const MainLayout: FC<PropsWithChildren<unknown>> = ({children}) => {

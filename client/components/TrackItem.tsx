@@ -1,9 +1,9 @@
-import { ITrack } from '@/types/track';
+import { ITrack } from '../types/track';
 import React from 'react';
 import { Card, IconButton, Grid } from '@mui/material'
 import { Pause, PlayArrow, Delete } from '@mui/icons-material'
 import { useRouter } from 'next/router';
-import {useAction} from "@/hooks/useAction";
+import {useAction} from "../hooks/useAction";
 
 interface TrackItemProps {
     track: ITrack;
