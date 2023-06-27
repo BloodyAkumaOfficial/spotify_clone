@@ -26,7 +26,7 @@ const TrackItem: React.FC<TrackItemProps> = ({track, active = true}) => {
     return (
         <Card style={{margin: 20, padding: 10, display: 'flex', alignItems: 'center'}} onClick={() => router.push('/tracks/' + track._id)}>
             <IconButton onClick={play}>
-                {active ?
+                {!active ?
                     <Pause/>
                 :
                     <PlayArrow/>

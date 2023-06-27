@@ -1,15 +1,16 @@
-import {NestFactory} from '@nestjs/core'
-import { AppModule } from './app.module'
+import {NestFactory} from "@nestjs/core";
+import {AppModule} from "./app.module";
+
 
 const start = async () => {
     try {
         const PORT = process.env.PORT || 5000;
         const app = await NestFactory.create(AppModule);
-        app.enableCors();
-        await app.listen(PORT, () => console.log(`server was started on ${PORT} port`));
+        app.enableCors()
+        await app.listen(PORT, () => console.log(`server started on PORT ${PORT}`))
     } catch (e) {
-        console.log(e.message)
+        console.log(e)
     }
 }
 
-start();
+start()

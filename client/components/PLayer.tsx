@@ -6,7 +6,7 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useAction} from "../hooks/useAction";
 
 
-let audio: HTMLMediaElement;
+let audio;
 const Player = () => {
 
     const {pause, active, volume, duration, currentTime} = useTypedSelector(state => state.player)
@@ -25,12 +25,12 @@ const Player = () => {
         if (active) {
             audio.src = 'http://localhost:5000/' + active.audio;
             audio.volume = volume / 100;
-            // @ts-ignore
-            audio.onloadeddata(() => {
+
+            audio.onloadedmetadata(e => {
                 setDuration(Math.ceil(audio.duration))
             })
-            // @ts-ignore
-            audio.ontimeupdate(() => {
+
+            audio.ontimeupdate(e => {
                 setCurrentTime(Math.ceil(audio.currentTime))
             })
         }
